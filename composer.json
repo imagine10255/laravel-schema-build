@@ -13,8 +13,11 @@
       "email": "imagine10255@gmail.com"
     }
   ],
-  "require": {},
-  "require-dev": {
+  "require": {
+    "php": ">=5.5.9",
+    "illuminate/contracts": "^5.1",
+    "illuminate/database": "^5.1",
+    "illuminate/support": "^5.1",
     "maatwebsite/excel": "^2.0"
   },
   "autoload": {
