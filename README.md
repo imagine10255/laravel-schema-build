@@ -12,7 +12,7 @@ Better Laravel Exception Handler
 
 ## Features
 - The database of the table schema, the output function into the file
-- Outfile Excel2007
+- Output Excel2007
 
 ## Installing
 
@@ -32,14 +32,13 @@ Instead, you may of course manually update your require block and run `composer 
 }
 ```
 
-Include the service provider within `config/app.php`. The service povider is needed for the generator artisan command.
+Include the service provider within `app/Providers/AppServiceProvider.php`. The service povider is needed for the generator artisan command.
 
 ```php
-'providers' => [
-    ...
-    Imagine10255\SchemaBuild\SchemaBuildServiceProvider::class,
-    ...
-];
+...
+if ($this->app->environment() == 'local') {
+    $this->app->register('Imagine10255\SchemaBuild\SchemaBuildServiceProvider');
+}
 ```
 
 publish

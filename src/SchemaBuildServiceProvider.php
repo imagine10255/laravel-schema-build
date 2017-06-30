@@ -50,7 +50,7 @@ class SchemaBuildServiceProvider extends ServiceProvider
     protected function handlePublishes()
     {
         $this->publishes([
-                __DIR__.'/../storage/schema-build-sample' => $this->app->storagePath().'/schema-build-sample']
+                __DIR__.'/../storage/schema-build' => $this->app->storagePath().'/schema-build']
             , 'storage');
     }
 }

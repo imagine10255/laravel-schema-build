@@ -36,13 +36,13 @@ class SchemaBuildExcel extends Command
 
     public function handle()
     {
-        $file = storage_path('sample/excel/schema.xlsx');
+        $file = storage_path('schema-build/excel.xlsx');
         if(!file_exists($file)){
             $this->error("$file is not exists, Please run publishes");
             return ;
         }
 
-        $this->excelObj = PHPExcel_IOFactory::load(storage_path('sample/excel/schema.xlsx'));
+        $this->excelObj = PHPExcel_IOFactory::load($file);
 
         $database = config('database.connections.mysql.database');
 
@@ -69,7 +69,7 @@ class SchemaBuildExcel extends Command
         //產生Excel
         $excel = PHPExcel_IOFactory::createWriter($this->excelObj, 'Excel2007');
 
-        $outputPath = storage_path('app/'.$database.'.xlsx');
+        $outputPath = storage_path('schema-build/'.$database.'-in'.date('Ymd').'.xlsx');
         $excel->save($outputPath);
         $this->info('file build success in '.$outputPath);
     }
