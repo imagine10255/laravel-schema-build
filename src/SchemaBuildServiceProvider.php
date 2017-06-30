@@ -24,6 +24,7 @@ class SchemaBuildServiceProvider extends ServiceProvider
     public function boot(Request $request, Router $router)
     {
         Schema::defaultStringLength(191);
+        $this->handlePublishes();
     }
 
     /**
@@ -38,8 +39,6 @@ class SchemaBuildServiceProvider extends ServiceProvider
                 Console\Commands\SchemaBuildExcel::class,
             ]);
         }
-
-//        $this->app->singleton(UsersRepositoryContract::class, UsersRepository::class);
     }
 
 
@@ -48,6 +47,8 @@ class SchemaBuildServiceProvider extends ServiceProvider
      */
     protected function handlePublishes()
     {
+        $this->publishes([
+            __DIR__.'/storage/schema-build-sample' => storage_path('schema-build-sample'),
+        ]);
     }
-
 }
