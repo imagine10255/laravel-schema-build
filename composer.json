@@ -1,18 +1,25 @@
 {
-    "name": "imagine10255/schema-build",
-    "description": "A Laravel Package to integrate Nette Tracy Debugger",
-    "keywords": ["laravel", "debugbar", "profiler", "debug", "webprofiler", "nette", "tracy", "error", "error handler"],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "imagine10255",
-            "email": "imagine10255@gmail.com"
-        }
-    ],
-    "require": {},
-    "autoload": {
-        "psr-4": {
-            "Imagine10255\\SchemaBuild\\": "src/"
-        }
+  "name": "imagine10255/schema-build",
+  "description": "The database of the table schema, the output function into the file",
+  "keywords": [
+    "laravel",
+    "migration",
+    "table-schema"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "imagine10255",
+      "email": "imagine10255@gmail.com"
     }
+  ],
+  "require": {},
+  "require-dev": {
+    "maatwebsite/excel": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Imagine10255\\SchemaBuild\\": "src/"
+    }
+  }
 }
