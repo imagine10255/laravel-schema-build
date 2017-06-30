@@ -1,4 +1,4 @@
-## [Nette Tracy](https://github.com/nette/tracy.git) for Laravel 5
+## Schema-Build for Laravel 5
 
 Better Laravel Exception Handler
 
