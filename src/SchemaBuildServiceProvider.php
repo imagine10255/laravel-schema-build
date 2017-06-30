@@ -24,7 +24,9 @@ class SchemaBuildServiceProvider extends ServiceProvider
     public function boot(Request $request, Router $router)
     {
         Schema::defaultStringLength(191);
-        $this->handlePublishes();
+        if ($this->app->runningInConsole() === true) {
+            $this->handlePublishes();
+        }
     }
 
     /**
@@ -48,7 +50,7 @@ class SchemaBuildServiceProvider extends ServiceProvider
     protected function handlePublishes()
     {
         $this->publishes([
-            __DIR__.'/storage/schema-build-sample' => storage_path('schema-build-sample'),
-        ]);
+                __DIR__.'/../storage/schema-build-sample' => $this->app->storagePath().'/schema-build-sample']
+            , 'storage');
     }
 }
