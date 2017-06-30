@@ -36,7 +36,7 @@ class SchemaBuildExcel extends Command
 
     public function handle()
     {
-        $file = storage_path('schema-build/excel.xlsx');
+        $file = storage_path('schema-build/sample/excel.xlsx');
         if(!file_exists($file)){
             $this->error("$file is not exists, Please run publishes");
             return ;
