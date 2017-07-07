@@ -93,25 +93,23 @@ class SchemaBuildExcel extends Command
 
         $span = 3;
         //顯示索引鍵
-        $indexQuery = collect(DB::select('SHOW INDEX FROM '.$table->table_name))->groupBy('Key_name');
+        $indexQuery = collect(DB::table('INFORMATION_SCHEMA.KEY_COLUMN_USAGE')
+            ->where('TABLE_SCHEMA',$this->database)
+            ->where('TABLE_NAME',$table->table_name)
+            ->select('CONSTRAINT_NAME','COLUMN_NAME','REFERENCED_TABLE_NAME','REFERENCED_COLUMN_NAME')
+            ->get());
 
         $indexQuery->each(function($indexData,$keyName) use ($sheet,&$span){
             $span++;
             $sheet->insertNewRowBefore($span,1);
             $sheet->mergeCells('A'.$span.':B'.$span); //Key name
-            $sheet->mergeCells('D'.$span.':G'.$span); //Column name
+            $sheet->mergeCells('C'.$span.':D'.$span); //Column name
+            $sheet->mergeCells('F'.$span.':G'.$span); //Column name
 
-
-            $columnName = [];
-            if(!empty($indexData[0])){
-
-                $sheet->setCellValue("A${span}",$indexData[0]->Key_name);
-                $sheet->setCellValue("C${span}",$indexData[0]->Non_unique);
-                foreach($indexData as $data){
-                    $columnName[] = $data->Column_name;
-                }
-                $sheet->setCellValue("D${span}",implode(',',$columnName));
-            }
+            $sheet->setCellValue("A${span}",$indexData->CONSTRAINT_NAME);
+            $sheet->setCellValue("C${span}",$indexData->COLUMN_NAME);
+            $sheet->setCellValue("E${span}",$indexData->REFERENCED_TABLE_NAME);
+            $sheet->setCellValue("F${span}",$indexData->REFERENCED_COLUMN_NAME);
         });
 
         $span+=2;
