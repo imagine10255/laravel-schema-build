@@ -54,3 +54,9 @@ build excel
 ```bash
 php artisan schema:build-excel
 ```
+
+## Review:
+
+<img src="./assets/reademe/sample1.jpg" width="600px">
+
+<img src="./assets/reademe/sample2.jpg" width="600px">
