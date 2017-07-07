@@ -12,7 +12,9 @@ Better Laravel Exception Handler
 
 ## Features
 - The database of the table schema, the output function into the file
+- Laravel 5
 - Output Excel2007
+- Mysql5.6 After,MariaDB10 After
 
 ## Installing
 
