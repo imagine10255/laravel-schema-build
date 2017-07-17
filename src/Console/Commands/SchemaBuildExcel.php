@@ -27,6 +27,7 @@ class SchemaBuildExcel extends Command
 
     protected $userService;
     protected $excelObj;
+    protected $database;
 
     public function __construct()
     {
@@ -44,9 +45,9 @@ class SchemaBuildExcel extends Command
 
         $this->excelObj = PHPExcel_IOFactory::load($file);
 
-        $database = config('database.connections.mysql.database');
+        $this->database = config('database.connections.mysql.database');
 
-        $tables = collect(DB::table('information_schema.tables')->where('table_schema',$database)
+        $tables = collect(DB::table('information_schema.tables')->where('table_schema',$this->database)
             ->select('table_name','table_comment')
             ->get());
 
@@ -69,7 +70,7 @@ class SchemaBuildExcel extends Command
         //產生Excel
         $excel = PHPExcel_IOFactory::createWriter($this->excelObj, 'Excel2007');
 
-        $outputPath = storage_path('schema-build/'.$database.'-in'.date('Ymd').'.xlsx');
+        $outputPath = storage_path('schema-build/'.$this->database.'-in'.date('Ymd').'.xlsx');
         $excel->save($outputPath);
         $this->info('file build success in '.$outputPath);
     }
